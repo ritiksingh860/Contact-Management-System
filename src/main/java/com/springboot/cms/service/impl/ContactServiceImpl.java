@@ -29,6 +29,18 @@ public class ContactServiceImpl implements ContactService {
                 .orElseThrow(() -> new ResourceNotFoundException("Contact not found for this id :: " + ContactId));
         return contact;
     }
+    
+    @Override
+    public List<Contacts> getContacts(String value, String type) {
+        if(type.equalsIgnoreCase("firstName")){
+           return contactsRepository.findByFirstName(value);
+        }else if(type.equalsIgnoreCase("lastName")){
+           return contactsRepository.findByLastName(value);
+        }else if(type.equalsIgnoreCase("emailId")){
+           return contactsRepository.findByEmailId(value);
+        }
+        return new ArrayList<>();
+    }
 
     @Override
     public Contacts createContact(Contacts Contact) {
