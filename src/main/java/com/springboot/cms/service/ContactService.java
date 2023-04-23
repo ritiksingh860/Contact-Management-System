@@ -13,6 +13,8 @@ public interface ContactService {
 
     Contacts getContactById(Long ContactId) throws ResourceNotFoundException;
 
+    List<Contacts> getContacts(String value, String type);
+    
     Contacts createContact(Contacts Contact);
 
     Contacts updateContact(Contacts contacts) throws BusinessException;
