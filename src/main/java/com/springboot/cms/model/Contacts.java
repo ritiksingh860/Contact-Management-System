@@ -11,26 +11,21 @@ import javax.persistence.Table;
 @Table(name = "contacts")
 public class Contacts {
 
-	private long id;
-	private String firstName;
-	private String lastName;
-	private String emailId;
-
-	private String phoneNumber;
-
-	public Contacts() {
-
-	}
-
-	public Contacts(String firstName, String lastName, String emailId, String phoneNumber) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailId = emailId;
-		this.phoneNumber = phoneNumber;
-	}
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	@Column(name = "first_name", nullable = false)
+	private String firstName;
+	@Column(name = "last_name", nullable = false)
+	private String lastName;
+	@Column(name = "email_address", nullable = false)
+	private String emailId;
+	@Column(name = "phone_number", nullable = false)
+	private String phoneNumber;
+
+	public Contacts() {}
+
 	public long getId() {
 		return id;
 	}
@@ -38,7 +33,7 @@ public class Contacts {
 		this.id = id;
 	}
 
-	@Column(name = "first_name", nullable = false)
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -46,7 +41,6 @@ public class Contacts {
 		this.firstName = firstName;
 	}
 
-	@Column(name = "last_name", nullable = false)
 	public String getLastName() {
 		return lastName;
 	}
@@ -54,7 +48,6 @@ public class Contacts {
 		this.lastName = lastName;
 	}
 
-	@Column(name = "email_address", nullable = false)
 	public String getEmailId() {
 		return emailId;
 	}
@@ -62,7 +55,7 @@ public class Contacts {
 		this.emailId = emailId;
 	}
 
-	@Column(name = "phone_number", nullable = false)
+
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
