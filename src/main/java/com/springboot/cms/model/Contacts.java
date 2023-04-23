@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,9 +12,14 @@ import javax.persistence.Table;
 @Table(name = "contacts")
 public class Contacts {
 
+	  /**
+  		 * The Constant serialVersionUID.
+  	 */
+  	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO ,generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
 	private long id;
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
