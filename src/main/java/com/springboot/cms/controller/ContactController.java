@@ -29,12 +29,12 @@ public class ContactController {
 	@Autowired
 	private ContactService contactService;
 
-	@GetMapping("/contacts")
+	@GetMapping("/contacts/getAll")
 	public List<Contacts> getAllContacts() {
 		return contactService.getAllContacts();
 	}
 
-	@GetMapping("/contacts/{id}")
+	@GetMapping("/contacts/find/{id}")
 	public ResponseEntity<Contacts> getContactById(@PathVariable(value = "id") Long contactId)
 			throws ResourceNotFoundException {
 		try {
@@ -45,8 +45,18 @@ public class ContactController {
 		}
 
 	}
+	
+	@GetMapping("/contacts/getContacts")
+	public List<Contacts> getContacts(@RequestParam(value = "value", required = true) String value,
+					@RequestParam(value = "type", required = true) String type) throws BusinessException {
+		try {
+			return contactService.getContacts(value, type);
+		}catch (Exception ex){
+			throw new BusinessException(ex.getMessage());
+		}
+	}
 
-	@PostMapping("/contacts")
+	@PostMapping("/contacts/create")
 	public Contacts createContact(@Valid @RequestBody Contacts contact) throws BusinessException {
 		try {
 			return contactService.createContact(contact);
@@ -55,7 +65,7 @@ public class ContactController {
 		}
 	}
 
-	@PutMapping("/contacts")
+	@PutMapping("/contacts/update")
 	public ResponseEntity<Contacts> updateContact(@Valid @RequestBody Contacts contacts) throws BusinessException {
 		try {
 			Contacts contact = contactService.updateContact(contacts);
@@ -65,7 +75,7 @@ public class ContactController {
 		}
 	}
 
-	@DeleteMapping("/contacts/{id}")
+	@DeleteMapping("/contacts/delete/{id}")
 	public Map<String, Boolean> deleteContact(@PathVariable(value = "id") Long contactId)
 			throws ResourceNotFoundException {
 		return contactService.deleteContact(contactId);
