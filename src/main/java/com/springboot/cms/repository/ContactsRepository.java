@@ -6,5 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContactsRepository extends JpaRepository<Contacts, Long>{
+  
+    List<Contacts> findByEmailId(String emailId);
+    List<Contacts> findByFirstName(String emailId);
+    List<Contacts> findByLastName(String emailId);
 
 }
