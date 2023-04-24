@@ -25,15 +25,18 @@ import com.springboot.cms.repository.ContactsRepository;
 
 @RestController
 @RequestMapping("/api/v1")
+@Api(value = "Contact-Mgmt", protocols = "http")
 public class ContactController {
 	@Autowired
 	private ContactService contactService;
 
+	@ApiOperation(value = "To access all the contact list", response = Contacts.class, code = 200)
 	@GetMapping("/contacts/getAll")
 	public List<Contacts> getAllContacts() {
 		return contactService.getAllContacts();
 	}
 
+	@ApiOperation(value = "To access all the contact by contact id", response = Contacts.class, code = 200)	
 	@GetMapping("/contacts/find/{id}")
 	public ResponseEntity<Contacts> getContactById(@PathVariable(value = "id") Long contactId)
 			throws ResourceNotFoundException {
@@ -46,6 +49,7 @@ public class ContactController {
 
 	}
 	
+	@ApiOperation(value = "To access all the contact list using value and type. Value can be user firstname,lastname or emailid and type have firstName/lastName/emailId", response = Contacts.class, code = 200)
 	@GetMapping("/contacts/getContacts")
 	public List<Contacts> getContacts(@RequestParam(value = "value", required = true) String value,
 					@RequestParam(value = "type", required = true) String type) throws BusinessException {
@@ -56,6 +60,7 @@ public class ContactController {
 		}
 	}
 
+	@ApiOperation(value = "create the contact using contact object", response = Contacts.class, code = 200)
 	@PostMapping("/contacts/create")
 	public Contacts createContact(@Valid @RequestBody Contacts contact) throws BusinessException {
 		try {
@@ -65,6 +70,7 @@ public class ContactController {
 		}
 	}
 
+	@ApiOperation(value = "update the contact using contact object", response = Contacts.class, code = 200)	
 	@PutMapping("/contacts/update")
 	public ResponseEntity<Contacts> updateContact(@Valid @RequestBody Contacts contacts) throws BusinessException {
 		try {
@@ -75,6 +81,7 @@ public class ContactController {
 		}
 	}
 
+	@ApiOperation(value = "Delete the contact using contact id", response = Map.class, code = 200)	
 	@DeleteMapping("/contacts/delete/{id}")
 	public Map<String, Boolean> deleteContact(@PathVariable(value = "id") Long contactId)
 			throws ResourceNotFoundException {
