@@ -7,4 +7,4 @@ Spring Boot, contact-management-system
 UserName : admin
 Password : admin123
 
-# using PostgreSql for the storagea
+# using PostgreSql for the storage
